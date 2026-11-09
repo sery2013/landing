@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Найдите свою пару прямо сейчас</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #0b0f17;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: #121824;
+            border: 1px solid #1f2b3e;
+            border-radius: 12px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        p {
+            font-size: 14px;
+            color: #9aa0a6;
+            margin-bottom: 24px;
+        }
+        .btn-option {
+            width: 100%;
+            background: #1a2332;
+            border: 1px solid #2a3b52;
+            color: #ffffff;
+            padding: 14px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-option:hover {
+            background: #1f2b3e;
+            border-color: #00E5FF;
+            color: #00E5FF;
+        }
+        .btn-option::after {
+            content: '›';
+            font-size: 20px;
+            color: #00E5FF;
+        }
+        .pulse-btn {
+            display: inline-block;
+            background: #00E5FF;
+            color: #0b0f17;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 10px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            transition: background 0.2s;
+        }
+        .pulse-btn:hover {
+            background: #00b3cc;
+        }
+        .loader {
+            border: 4px solid #1a2332;
+            border-top: 4px solid #00E5FF;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Шаг 1: Пол / Кого ищет -->
+        <div class="step active" id="step-1">
+            <h1>Кто вас интересует?</h1>
+            <p>Укажите кого вы бы хотели найти в вашем городе</p>
+            <button class="btn-option" onclick="nextStep(2)">Женщины</button>
+            <button class="btn-option" onclick="nextStep(2)">Мужчины</button>
+            <button class="btn-option" onclick="nextStep(2)">Все варианты</button>
+        </div>
+
+        <!-- Шаг 2: Возрастной диапазон -->
+        <div class="step" id="step-2">
+            <h1>Какой возраст вас привлекает?</h1>
+            <p>Выберите предпочтительный диапазон для знакомств</p>
+            <button class="btn-option" onclick="nextStep(3)">18 – 25 лет</button>
+            <button class="btn-option" onclick="nextStep(3)">25 – 35 лет</button>
+            <button class="btn-option" onclick="nextStep(3)">35+ лет</button>
+        </div>
+
+        <!-- Шаг 3: Поиск совпадений (Имитация загрузки) -->
+        <div class="step" id="step-3">
+            <h1>Ищем анкеты рядом с вами...</h1>
+            <p>Подождите, система подбирает пользователей в вашем регионе</p>
+            <div class="loader"></div>
+        </div>
+
+        <!-- Шаг 4: Финальный экран с призывом к действию (CTA) -->
+        <div class="step" id="step-4">
+            <h1>Анкеты найдены!</h1>
+            <p>Мы нашли пользователей, готовых к общению. Нажмите кнопку ниже, чтобы просмотреть профили и начать чат.</p>
+            <!-- Сюда вставляется ваша партнерская ссылка (smartlink или offer url) -->
+            <a href="YOUR_OFFER_LINK_HERE" class="pulse-btn" id="ctaLink">Смотреть анкеты (18+)</a>
+        </div>
+
+    </div>
+
+    <script>
+        function nextStep(stepNumber) {
+            // Убираем активный класс у текущего шага
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            
+            // Включаем следующий шаг
+            let currentStep = document.getElementById('step-' + stepNumber);
+            currentStep.classList.add('active');
+
+            // Если перешли на 3 шаг (загрузка), автоматически через 2 секунды перекидываем на 4 финишный шаг
+            if (stepNumber === 3) {
+                setTimeout(function() {
+                    nextStep(4);
+                }, 2000);
+            }
+        }
+    </script>
+
+</body>
+</html>
