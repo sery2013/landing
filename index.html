@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Найдите свою пару прямо сейчас</title>
+    <title>Знакомства без обязательств — Найди свою пару</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,10 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         body {
-            background-color: #0b0f17;
+            /* Фоновое изображение (романтичная девушка в высоком качестве) с темным градиентным напылением */
+            background: linear-gradient(to bottom, rgba(11, 15, 23, 0.7), rgba(11, 15, 23, 0.95)), 
+                        url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
             color: #e0e0e0;
             display: flex;
             justify-content: center;
@@ -20,14 +23,16 @@
             min-height: 100vh;
             padding: 20px;
         }
-        .container {
+        .wrapper {
             width: 100%;
-            max-width: 440px;
-            background: #121824;
-            border: 1px solid #1f2b3e;
-            border-radius: 12px;
-            padding: 30px 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            max-width: 420px;
+            background: rgba(18, 24, 36, 0.85); /* Полупрозрачный фон блоков */
+            backdrop-filter: blur(12px); /* Эффект размытия стекла */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             text-align: center;
         }
         .step {
@@ -38,130 +43,153 @@
             animation: fadeIn 0.4s ease-in-out;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.1);
+            color: #00E5FF;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0, 229, 255, 0.3);
         }
         h1 {
-            font-size: 22px;
+            font-size: 24px;
             color: #ffffff;
-            margin-bottom: 12px;
-            line-height: 1.3;
+            margin-bottom: 10px;
+            line-height: 1.25;
+            font-weight: 700;
         }
         p {
             font-size: 14px;
-            color: #9aa0a6;
+            color: #a0aec0;
             margin-bottom: 24px;
+            line-height: 1.4;
         }
-        .btn-option {
+        .option-btn {
             width: 100%;
-            background: #1a2332;
-            border: 1px solid #2a3b52;
+            background: rgba(26, 35, 50, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: #ffffff;
-            padding: 14px 20px;
+            padding: 15px 20px;
             margin-bottom: 12px;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 15px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             text-align: left;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .btn-option:hover {
-            background: #1f2b3e;
+        .option-btn:hover {
+            background: rgba(0, 229, 255, 0.15);
             border-color: #00E5FF;
             color: #00E5FF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
         }
-        .btn-option::after {
-            content: '›';
-            font-size: 20px;
+        .option-btn::after {
+            content: '→';
+            font-size: 16px;
             color: #00E5FF;
+            opacity: 0.7;
         }
-        .pulse-btn {
-            display: inline-block;
-            background: #00E5FF;
-            color: #0b0f17;
-            padding: 16px 32px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            text-decoration: none;
-            margin-top: 10px;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-            transition: background 0.2s;
+        .loader-box {
+            padding: 20px 0;
         }
-        .pulse-btn:hover {
-            background: #00b3cc;
-        }
-        .loader {
-            border: 4px solid #1a2332;
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
             border-top: 4px solid #00E5FF;
             border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+            animation: spin 0.9s linear infinite;
+            margin: 0 auto 20px auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .cta-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #00E5FF, #0088cc);
+            color: #0b0f17;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+        .cta-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+            box-shadow: 0 0 35px rgba(0, 229, 255, 0.6);
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="wrapper">
         
-        <!-- Шаг 1: Пол / Кого ищет -->
+        <!-- Шаг 1 -->
         <div class="step active" id="step-1">
-            <h1>Кто вас интересует?</h1>
-            <p>Укажите кого вы бы хотели найти в вашем городе</p>
-            <button class="btn-option" onclick="nextStep(2)">Женщины</button>
-            <button class="btn-option" onclick="nextStep(2)">Мужчины</button>
-            <button class="btn-option" onclick="nextStep(2)">Все варианты</button>
+            <span class="badge">🔥 Быстрый подбор пары</span>
+            <h1>Кого вы хотите найти сегодня?</h1>
+            <p>Пройдите короткий опрос, чтобы система подобрала активные анкеты в вашем регионе.</p>
+            <button class="option-btn" onclick="goToStep(2)">Девушек для общения</button>
+            <button class="option-btn" onclick="goToStep(2)">Женщин постарше</button>
+            <button class="option-btn" onclick="goToStep(2)">Открыть все анкеты</button>
         </div>
 
-        <!-- Шаг 2: Возрастной диапазон -->
+        <!-- Шаг 2 -->
         <div class="step" id="step-2">
-            <h1>Какой возраст вас привлекает?</h1>
-            <p>Выберите предпочтительный диапазон для знакомств</p>
-            <button class="btn-option" onclick="nextStep(3)">18 – 25 лет</button>
-            <button class="btn-option" onclick="nextStep(3)">25 – 35 лет</button>
-            <button class="btn-option" onclick="nextStep(3)">35+ лет</button>
+            <span class="badge">📍 Фильтр по городу</span>
+            <h1>Какой формат встреч вам ближе?</h1>
+            <p>Укажите ваши предпочтения для более точного подбора.</p>
+            <button class="option-btn" onclick="goToStep(3)">Свидания и романтика</button>
+            <button class="option-btn" onclick="goToStep(3)">Общение и переписка</button>
+            <button class="option-btn" onclick="goToStep(3)">Свободные отношения</button>
         </div>
 
-        <!-- Шаг 3: Поиск совпадений (Имитация загрузки) -->
+        <!-- Шаг 3: Загрузка -->
         <div class="step" id="step-3">
-            <h1>Ищем анкеты рядом с вами...</h1>
-            <p>Подождите, система подбирает пользователей в вашем регионе</p>
-            <div class="loader"></div>
+            <div class="loader-box">
+                <div class="spinner"></div>
+                <h1>Анализ базы...</h1>
+                <p>Ищем пользователей онлайн, подходящих под ваши критерии...</p>
+            </div>
         </div>
 
-        <!-- Шаг 4: Финальный экран с призывом к действию (CTA) -->
+        <!-- Шаг 4: Финал -->
         <div class="step" id="step-4">
-            <h1>Анкеты найдены!</h1>
-            <p>Мы нашли пользователей, готовых к общению. Нажмите кнопку ниже, чтобы просмотреть профили и начать чат.</p>
-            <!-- Сюда вставляется ваша партнерская ссылка (smartlink или offer url) -->
-            <a href="YOUR_OFFER_LINK_HERE" class="pulse-btn" id="ctaLink">Смотреть анкеты (18+)</a>
+            <span class="badge" style="background: rgba(0, 255, 128, 0.1); color: #00ff80; border-color: rgba(0, 255, 128, 0.3);">✓ Доступ открыт</span>
+            <h1>Анкеты успешно найдены!</h1>
+            <p>В вашем районе зафиксировано <b>42 активных пользователя</b>, готовых ответить прямо сейчас.</p>
+            <!-- Сюда вставляется ваша партнерская ссылка -->
+            <a href="YOUR_OFFER_LINK_HERE" class="cta-btn">Смотреть фото и чат (18+)</a>
         </div>
 
     </div>
 
     <script>
-        function nextStep(stepNumber) {
-            // Убираем активный класс у текущего шага
+        function goToStep(stepNum) {
             document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-            
-            // Включаем следующий шаг
-            let currentStep = document.getElementById('step-' + stepNumber);
-            currentStep.classList.add('active');
+            document.getElementById('step-' + stepNum).classList.add('active');
 
-            // Если перешли на 3 шаг (загрузка), автоматически через 2 секунды перекидываем на 4 финишный шаг
-            if (stepNumber === 3) {
-                setTimeout(function() {
-                    nextStep(4);
+            // Если перешли на шаг загрузки (3), через 2 секунды автоматически показываем финал (4)
+            if (stepNum === 3) {
+                setTimeout(() => {
+                    goToStep(4);
                 }, 2000);
             }
         }
