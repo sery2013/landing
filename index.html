@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Локальный радар знакомств — Найти пару</title>
+    <title>Найди свою любовь — Романтические знакомства</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,278 +13,309 @@
         }
 
         body {
-            /* Яркий динамичный фон с акцентом на ночной город и неоновое свечение */
-            background: linear-gradient(180deg, #05070b 0%, #101726 100%),
-                        url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            /* Полноэкранный фон: романтическая пара, неоновое затемнение */
+            background: linear-gradient(180deg, rgba(11, 15, 23, 0.75) 0%, rgba(7, 9, 14, 0.92) 100%),
+                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 20px;
-            overflow-x: hidden;
         }
 
-        /* Обёртка в стиле карточки смартфона / дейтинг-приложения */
-        .app-card {
+        header {
             width: 100%;
-            max-width: 380px;
-            background: rgba(13, 18, 28, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 85, 0.1);
-            position: relative;
-        }
-
-        /* Верхняя мини-плашка гео-радара */
-        .radar-header {
-            padding: 16px 20px;
+            max-width: 900px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 0;
         }
 
-        .radar-title {
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+        .logo span {
+            color: #ff0055;
+        }
+
+        .live-counter {
+            background: rgba(255, 0, 85, 0.15);
+            border: 1px solid rgba(255, 0, 85, 0.4);
+            color: #ff5588;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            color: #8F9CAE;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .geo-dot {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            color: #FF0055;
-            font-weight: 700;
-        }
-        .geo-dot span {
-            width: 6px;
-            height: 6px;
-            background: #FF0055;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #FF0055;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.4); opacity: 0.6; }
-            100% { transform: scale(1); opacity: 1; }
+            gap: 8px;
         }
 
-        /* Экран профиля (Основной слайдер) */
-        .profile-stage {
-            position: relative;
+        .heart-beat {
+            animation: heartBeat 1.2s infinite;
+            display: inline-block;
+        }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        /* Романтическая стеклянная карточка */
+        .romance-card {
             width: 100%;
-            height: 420px;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 0.3s ease;
-        }
-
-        /* Градиент затемнения для читаемости имени поверх фото */
-        .profile-stage::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 150px;
-            background: linear-gradient(to top, rgba(13, 18, 28, 1), transparent);
-        }
-
-        .profile-info-overlay {
-            position: absolute;
-            bottom: 16px;
-            left: 20px;
-            right: 20px;
-            z-index: 2;
-        }
-
-        .profile-name {
-            font-size: 24px;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .profile-sub {
-            font-size: 13px;
-            color: #00E5FF;
-            margin-top: 4px;
-            font-weight: 500;
-        }
-
-        /* Кнопки действий (Свайпы / Симпатии) */
-        .action-buttons {
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            background: rgba(13, 18, 28, 0.9);
-        }
-
-        .btn-action {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-
-        .btn-action:hover {
-            transform: scale(1.08);
-        }
-
-        .btn-reject {
-            background: #1a2332;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #8F9CAE;
-        }
-
-        .btn-like {
-            background: linear-gradient(135deg, #FF0055, #FF5588);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
-        }
-
-        /* Экран финального мэтча (скрыт по умолчанию) */
-        .match-screen {
-            display: none;
-            padding: 40px 24px;
+            max-width: 440px;
+            background: rgba(18, 24, 36, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 85, 0.25);
+            border-radius: 28px;
+            padding: 32px 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 85, 0.15);
             text-align: center;
+            margin: auto;
+        }
+
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
             animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .match-title {
-            font-size: 26px;
+        h1 {
+            font-size: 24px;
             font-weight: 800;
-            color: #fff;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #FFF, #00E5FF);
+            margin-bottom: 10px;
+            line-height: 1.25;
+            background: linear-gradient(135deg, #ffffff, #ff80ab);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .match-desc {
+        p {
             font-size: 14px;
-            color: #8F9CAE;
-            margin-bottom: 28px;
-            line-height: 1.5;
+            color: #9aa0a6;
+            margin-bottom: 24px;
+            line-height: 1.45;
         }
 
-        .cta-button {
+        .btn-romantic {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-romantic:hover {
+            background: rgba(255, 0, 85, 0.15);
+            border-color: #ff0055;
+            color: #ff80ab;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.2);
+        }
+
+        .btn-romantic::after {
+            content: '♥';
+            color: #ff0055;
+            font-size: 16px;
+        }
+
+        /* Имитация входящего голосового / личного чата */
+        .voice-chat-widget {
+            background: linear-gradient(135deg, rgba(255, 0, 85, 0.12), rgba(0, 229, 255, 0.08));
+            border: 1px solid rgba(255, 0, 85, 0.35);
+            border-radius: 18px;
+            padding: 14px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .girl-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #ff0055;
+            flex-shrink: 0;
+            box-shadow: 0 0 12px rgba(255, 0, 85, 0.4);
+        }
+
+        .msg-content {
+            flex-grow: 1;
+        }
+
+        .msg-content strong {
+            font-size: 14px;
+            color: #fff;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* Визуальная анимация аудиоволны */
+        .audio-wave {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-top: 4px;
+        }
+        .wave-bar {
+            width: 3px;
+            height: 12px;
+            background: #00E5FF;
+            border-radius: 2px;
+            animation: wave 1s infinite ease-in-out;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; height: 18px; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; height: 10px; }
+        .wave-bar:nth-child(4) { animation-delay: 0.1s; height: 16px; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1.3); }
+        }
+
+        .cta-heart-btn {
             display: block;
             width: 100%;
-            background: linear-gradient(135deg, #00E5FF, #0077FF);
-            color: #05070b;
+            background: linear-gradient(135deg, #ff0055, #ff5588);
+            color: #ffffff;
             padding: 18px;
             border-radius: 16px;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 800;
             text-decoration: none;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
-            transition: all 0.2s;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.5);
+            transition: 0.2s;
         }
 
-        .cta-button:hover {
-            box-shadow: 0 0 45px rgba(0, 229, 255, 0.7);
-            transform: translateY(-2px);
+        .cta-heart-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 45px rgba(255, 0, 85, 0.8);
         }
+
+        .pulse-loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 0, 85, 0.2);
+            border-top: 3px solid #ff0055;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 10px 0;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-card">
+    <header>
+        <div class="logo">VELVET<span>LOVE</span></div>
+        <div class="live-counter">
+            <span class="heart-beat">♥</span> 1,240 пар совпали сегодня
+        </div>
+    </header>
+
+    <div class="romance-card">
         
-        <!-- Радар плашка -->
-        <div class="radar-header" id="radarHeader">
-            <span class="radar-title">Радар • Рядом с вами</span>
-            <div class="geo-dot"><span></span> Онлайн</div>
+        <!-- Шаг 1 -->
+        <div class="step active" id="step-1">
+            <h1>Почувствуй романтику сегодня</h1>
+            <p>Выберите, каких отношений вы ищете в вашем городе</p>
+            <button class="btn-romantic" onclick="goToStep(2)">Романтические свидания</button>
+            <button class="btn-romantic" onclick="goToStep(2)">Страстное общение</button>
+            <button class="btn-romantic" onclick="goToStep(2)">Серьёзные отношения</button>
         </div>
 
-        <!-- Карточка профиля с интерактивным свайпом -->
-        <div class="profile-stage" id="profileStage" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80');">
-            <div class="profile-info-overlay">
-                <div class="profile-name" id="profileName">Кристина, 22</div>
-                <div class="profile-sub" id="profileDist">📍 в 1.4 км от вас • Ищет встречу</div>
+        <!-- Шаг 2 -->
+        <div class="step" id="step-2">
+            <h1>Идеальный возраст пары</h1>
+            <p>Система подберёт анкеты девушек по вашим предпочтениям</p>
+            <button class="btn-romantic" onclick="goToStep(3)">18 — 24 года</button>
+            <button class="btn-romantic" onclick="goToStep(3)">25 — 34 года</button>
+            <button class="btn-romantic" onclick="goToStep(3)">35+ лет</button>
+        </div>
+
+        <!-- Шаг 3: Лоадер -->
+        <div class="step" id="step-3">
+            <div class="pulse-loader"></div>
+            <h1>Ищем взаимные симпатии...</h1>
+            <p>Подключаемся к приватному чату вашего региона</p>
+        </div>
+
+        <!-- Шаг 4: Финал (Фейк-чат + CTA) -->
+        <div class="step" id="step-4">
+            
+            <div class="voice-chat-widget">
+                <div class="girl-avatar" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="msg-content">
+                    <strong>Катерина, 22 года (в 900м)</strong>
+                    <div style="font-size: 12px; color: #ff80ab;">«Отправила вам голосовое сообщение...»</div>
+                    <div class="audio-wave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Кнопки управления (Интерактив) -->
-        <div class="action-buttons" id="actionButtons">
-            <button class="btn-action btn-reject" onclick="changeProfile()">✕</button>
-            <button class="btn-action btn-like" onclick="triggerMatch()">♥</button>
-        </div>
+            <h1>Ваша пара найдена!</h1>
+            <p>Катерина и ещё 14 девушек онлайн и готовы ответить прямо сейчас.</p>
 
-        <!-- Экран успешного совпадения (Появляется при клике на сердечко) -->
-        <div class="match-screen" id="matchScreen">
-            <div class="match-title">Взаимная симпатия! 🔥</div>
-            <div class="match-desc">Кристина и еще 18 пользователей из вашего района хотят отправить вам сообщение и фото.</div>
-            <!-- Сюда вставляется ваша партнерская ссылка -->
-            <a href="YOUR_OFFER_LINK_HERE" class="cta-button">НАЧАТЬ ОБЩЕНИЕ (18+)</a>
+            <!-- Ваша смартлинк ссылка -->
+            <a href="YOUR_OFFER_LINK_HERE" class="cta-heart-btn">ОТКРЫТЬ ЧАТ И ФОТО (18+)</a>
         </div>
 
     </div>
 
     <footer>
-        18+ • Безопасное соединение шифруется протоколом SSL
+        18+ • Все соединения защищены SSL-шифрованием
     </footer>
 
     <script>
-        // Массив моделей для симуляции свайпов
-        const profiles = [
-            { name: "Анна, 24", dist: "в 800 м от вас", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" },
-            { name: "Елена, 21", dist: "в 2.1 км от вас", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" }
-        ];
-        let index = 0;
+        function goToStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
 
-        function changeProfile() {
-            if (index < profiles.length) {
-                let stage = document.getElementById('profileStage');
-                stage.style.opacity = "0.4";
-                setTimeout(() => {
-                    stage.style.backgroundImage = `url('${profiles[index].img}')`;
-                    document.getElementById('profileName').innerText = profiles[index].name;
-                    document.getElementById('profileDist').innerText = `📍 ${profiles[index].dist} • Ищет встречу`;
-                    stage.style.opacity = "1";
-                    index++;
-                }, 200);
-            } else {
-                // Если пролистал все — автоматически триггерим мэтч
-                triggerMatch();
+            if (step === 3) {
+                setTimeout(() => goToStep(4), 1900);
             }
-        }
-
-        function triggerMatch() {
-            document.getElementById('profileStage').style.display = 'none';
-            document.getElementById('actionButtons').style.display = 'none';
-            document.getElementById('radarHeader').style.display = 'none';
-            document.getElementById('matchScreen').style.display = 'block';
         }
     </script>
 </body>
