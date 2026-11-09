@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Найди свою любовь — Романтические знакомства</title>
+    <title>Горячие знакомства без цензуры — Онлайн чат</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,9 +13,9 @@
         }
 
         body {
-            /* Полноэкранный фон: романтическая пара, неоновое затемнение */
-            background: linear-gradient(180deg, rgba(11, 15, 23, 0.75) 0%, rgba(7, 9, 14, 0.92) 100%),
-                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            /* Полноэкранный фон: яркая привлекательная модель с глубоким неоновым затемнением */
+            background: linear-gradient(180deg, rgba(5, 7, 10, 0.6) 0%, rgba(5, 7, 10, 0.95) 100%),
+                        url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             min-height: 100vh;
@@ -36,51 +36,40 @@
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 1px;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
             color: #fff;
         }
         .logo span {
-            color: #ff0055;
+            color: #FF0055;
+            text-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
         }
 
-        .live-counter {
-            background: rgba(255, 0, 85, 0.15);
-            border: 1px solid rgba(255, 0, 85, 0.4);
-            color: #ff5588;
+        .hot-badge {
+            background: rgba(255, 0, 85, 0.2);
+            border: 1px solid rgba(255, 0, 85, 0.5);
+            color: #ff3377;
             padding: 6px 14px;
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
         }
 
-        .heart-beat {
-            animation: heartBeat 1.2s infinite;
-            display: inline-block;
-        }
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
-
-        /* Романтическая стеклянная карточка */
-        .romance-card {
+        /* Центральная карточка */
+        .hot-card {
             width: 100%;
-            max-width: 440px;
-            background: rgba(18, 24, 36, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 0, 85, 0.25);
-            border-radius: 28px;
-            padding: 32px 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 85, 0.15);
+            max-width: 420px;
+            background: rgba(12, 16, 24, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 24px;
+            padding: 30px 22px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 0, 85, 0.2);
             text-align: center;
             margin: auto;
         }
@@ -90,145 +79,120 @@
         }
         .step.active {
             display: block;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.35s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             line-height: 1.25;
-            background: linear-gradient(135deg, #ffffff, #ff80ab);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fff;
         }
 
         p {
-            font-size: 14px;
+            font-size: 13px;
             color: #9aa0a6;
-            margin-bottom: 24px;
-            line-height: 1.45;
+            margin-bottom: 22px;
+            line-height: 1.4;
         }
 
-        .btn-romantic {
+        .btn-hot {
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #ffffff;
-            padding: 16px 20px;
+            padding: 15px 20px;
             margin-bottom: 12px;
-            border-radius: 14px;
+            border-radius: 12px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s;
+            transition: all 0.2s;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .btn-romantic:hover {
+        .btn-hot:hover {
             background: rgba(255, 0, 85, 0.15);
-            border-color: #ff0055;
-            color: #ff80ab;
+            border-color: #FF0055;
+            color: #ff3377;
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.2);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
         }
 
-        .btn-romantic::after {
-            content: '♥';
-            color: #ff0055;
-            font-size: 16px;
+        .btn-hot::after {
+            content: '🔥';
         }
 
-        /* Имитация входящего голосового / личного чата */
-        .voice-chat-widget {
-            background: linear-gradient(135deg, rgba(255, 0, 85, 0.12), rgba(0, 229, 255, 0.08));
-            border: 1px solid rgba(255, 0, 85, 0.35);
-            border-radius: 18px;
+        /* Интерактивный виджет входящего вызова / сообщения */
+        .private-request {
+            background: linear-gradient(135deg, rgba(255,0,85,0.2), rgba(12,16,24,0.9));
+            border: 1px solid rgba(255, 0, 85, 0.4);
+            border-radius: 16px;
             padding: 14px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 12px;
             text-align: left;
         }
 
-        .girl-avatar {
-            width: 52px;
-            height: 52px;
+        .req-avatar {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background-size: cover;
             background-position: center;
-            border: 2px solid #ff0055;
+            border: 2px solid #FF0055;
             flex-shrink: 0;
-            box-shadow: 0 0 12px rgba(255, 0, 85, 0.4);
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
         }
 
-        .msg-content {
-            flex-grow: 1;
+        .req-text {
+            font-size: 13px;
+            color: #e0e0e0;
         }
 
-        .msg-content strong {
-            font-size: 14px;
-            color: #fff;
+        .req-text strong {
             display: block;
-            margin-bottom: 3px;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 2px;
         }
 
-        /* Визуальная анимация аудиоволны */
-        .audio-wave {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            margin-top: 4px;
-        }
-        .wave-bar {
-            width: 3px;
-            height: 12px;
-            background: #00E5FF;
-            border-radius: 2px;
-            animation: wave 1s infinite ease-in-out;
-        }
-        .wave-bar:nth-child(2) { animation-delay: 0.2s; height: 18px; }
-        .wave-bar:nth-child(3) { animation-delay: 0.4s; height: 10px; }
-        .wave-bar:nth-child(4) { animation-delay: 0.1s; height: 16px; }
-
-        @keyframes wave {
-            0%, 100% { transform: scaleY(0.5); }
-            50% { transform: scaleY(1.3); }
-        }
-
-        .cta-heart-btn {
+        .cta-hot-btn {
             display: block;
             width: 100%;
-            background: linear-gradient(135deg, #ff0055, #ff5588);
+            background: linear-gradient(135deg, #FF0055, #ff3377);
             color: #ffffff;
             padding: 18px;
-            border-radius: 16px;
+            border-radius: 14px;
             font-size: 17px;
-            font-weight: 800;
+            font-weight: 900;
             text-decoration: none;
             text-align: center;
-            box-shadow: 0 0 30px rgba(255, 0, 85, 0.5);
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.6);
             transition: 0.2s;
+            letter-spacing: 0.5px;
         }
 
-        .cta-heart-btn:hover {
+        .cta-hot-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 45px rgba(255, 0, 85, 0.8);
+            box-shadow: 0 0 45px rgba(255, 0, 85, 0.9);
         }
 
-        .pulse-loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 0, 85, 0.2);
-            border-top: 3px solid #ff0055;
+        .spinner {
+            width: 45px;
+            height: 45px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #FF0055;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin: 20px auto;
@@ -236,7 +200,7 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         footer {
-            font-size: 12px;
+            font-size: 11px;
             color: rgba(255, 255, 255, 0.4);
             padding: 10px 0;
         }
@@ -245,67 +209,59 @@
 <body>
 
     <header>
-        <div class="logo">VELVET<span>LOVE</span></div>
-        <div class="live-counter">
-            <span class="heart-beat">♥</span> 1,240 пар совпали сегодня
-        </div>
+        <div class="logo">NIGHT<span>CHAT</span></div>
+        <div class="hot-badge">⚡ 18+ Only</div>
     </header>
 
-    <div class="romance-card">
+    <div class="hot-card">
         
         <!-- Шаг 1 -->
         <div class="step active" id="step-1">
-            <h1>Почувствуй романтику сегодня</h1>
-            <p>Выберите, каких отношений вы ищете в вашем городе</p>
-            <button class="btn-romantic" onclick="goToStep(2)">Романтические свидания</button>
-            <button class="btn-romantic" onclick="goToStep(2)">Страстное общение</button>
-            <button class="btn-romantic" onclick="goToStep(2)">Серьёзные отношения</button>
+            <h1>Горячие анкеты в вашем городе</h1>
+            <p>Выберите категорию девушек для мгновенного доступа к закрытым фото и чату</p>
+            <button class="btn-hot" onclick="goToStep(2)">Студентки (18-21)</button>
+            <button class="btn-hot" onclick="goToStep(2)">Модели и вебкам</button>
+            <button class="btn-hot" onclick="goToStep(2)">Зрелые женщины</button>
         </div>
 
         <!-- Шаг 2 -->
         <div class="step" id="step-2">
-            <h1>Идеальный возраст пары</h1>
-            <p>Система подберёт анкеты девушек по вашим предпочтениям</p>
-            <button class="btn-romantic" onclick="goToStep(3)">18 — 24 года</button>
-            <button class="btn-romantic" onclick="goToStep(3)">25 — 34 года</button>
-            <button class="btn-romantic" onclick="goToStep(3)">35+ лет</button>
+            <h1>Какой формат общения предпочитаете?</h1>
+            <p>Укажите цель для подбора наиболее подходящих профилей</p>
+            <button class="btn-hot" onclick="goToStep(3)">Интимные фото / Обмен</button>
+            <button class="btn-hot" onclick="goToStep(3)">Встреча сегодня ночью</button>
+            <button class="btn-hot" onclick="goToStep(3)">Видеочат без цензуры</button>
         </div>
 
         <!-- Шаг 3: Лоадер -->
         <div class="step" id="step-3">
-            <div class="pulse-loader"></div>
-            <h1>Ищем взаимные симпатии...</h1>
-            <p>Подключаемся к приватному чату вашего региона</p>
+            <div class="spinner"></div>
+            <h1>Проверка доступа 18+...</h1>
+            <p>Связываемся с защищенным сервером анкет...</p>
         </div>
 
-        <!-- Шаг 4: Финал (Фейк-чат + CTA) -->
+        <!-- Шаг 4: Финал -->
         <div class="step" id="step-4">
             
-            <div class="voice-chat-widget">
-                <div class="girl-avatar" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80');"></div>
-                <div class="msg-content">
-                    <strong>Катерина, 22 года (в 900м)</strong>
-                    <div style="font-size: 12px; color: #ff80ab;">«Отправила вам голосовое сообщение...»</div>
-                    <div class="audio-wave">
-                        <div class="wave-bar"></div>
-                        <div class="wave-bar"></div>
-                        <div class="wave-bar"></div>
-                        <div class="wave-bar"></div>
-                    </div>
+            <div class="private-request">
+                <div class="req-avatar" style="background-image: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="req-text">
+                    <strong>Милана, 20 лет (рядом)</strong>
+                    «Я в сети и жду твоего сообщения в закрытом чате...»
                 </div>
             </div>
 
-            <h1>Ваша пара найдена!</h1>
-            <p>Катерина и ещё 14 девушек онлайн и готовы ответить прямо сейчас.</p>
+            <h1>Доступ разблокирован!</h1>
+            <p>Система нашла девушек поблизости. Нажмите кнопку ниже для входа в систему.</p>
 
             <!-- Ваша смартлинк ссылка -->
-            <a href="YOUR_OFFER_LINK_HERE" class="cta-heart-btn">ОТКРЫТЬ ЧАТ И ФОТО (18+)</a>
+            <a href="YOUR_OFFER_LINK_HERE" class="cta-hot-btn">ВОЙТИ В ЧАТ (18+)</a>
         </div>
 
     </div>
 
     <footer>
-        18+ • Все соединения защищены SSL-шифрованием
+        18+ • Все модели достигли совершеннолетия. Строго конфиденциально.
     </footer>
 
     <script>
@@ -314,7 +270,7 @@
             document.getElementById('step-' + step).classList.add('active');
 
             if (step === 3) {
-                setTimeout(() => goToStep(4), 1900);
+                setTimeout(() => goToStep(4), 1800);
             }
         }
     </script>
